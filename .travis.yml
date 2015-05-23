@@ -42,7 +42,7 @@ script:
 after_success:
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
-- git branch master origin/master
+- git branch master deploy/master
 - git config user.name '$GIT_NAME'
 - git config user.email '$GIT_EMAIL'
 - ember github-pages:commit --message "New release" --branch master --environment development
