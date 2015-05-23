@@ -8,7 +8,6 @@ cache:
 env:
   matrix:
   - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-1.11.3
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
   - EMBER_TRY_SCENARIO=ember-canary
@@ -44,4 +43,4 @@ script:
 
 after_success:
 - ember github-pages:commit --message "New release" --branch=master --environment=development
-- git push
+- git push https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git master
