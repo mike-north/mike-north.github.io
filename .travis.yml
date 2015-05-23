@@ -42,6 +42,9 @@ script:
 after_success:
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
+- export CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+- git checkout master
+- git checkout $CURRENT_GIT_BRANCH
 - git config user.name 'Mike North'
 - git config user.email 'michael.l.north@gmail.com'
 - ember github-pages:commit --message "New release" --branch=master --environment=development
