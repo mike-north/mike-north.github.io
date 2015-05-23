@@ -40,6 +40,7 @@ script:
 - ember try $EMBER_TRY_SCENARIO test
 
 after_success:
+- rm -rf travis-phantomjs
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
 - git branch master deploy/master
