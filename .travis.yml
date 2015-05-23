@@ -46,7 +46,7 @@ after_success:
 - rm -rf travis-phantomjs
 - git checkout master
 - git checkout $CURRENT_GIT_BRANCH
-- git config user.name 'Mike North'
-- git config user.email 'michael.l.north@gmail.com'
+- git config user.name '$GIT_NAME'
+- git config user.email '$GIT_EMAIL'
 - ember github-pages:commit --message "New release" --branch=master --environment=development
 - git push deploy master
