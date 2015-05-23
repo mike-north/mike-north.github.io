@@ -8,9 +8,6 @@ cache:
 env:
   matrix:
   - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
   global:
     secure: UqolzT6Ki+DIWBjGJ89GG0ei1ppwIbZiKkdHF/Ib8FBljonCQJ4HxEDQRLDquvO5nOXcfwL+YMuic0LlMPjf8plgh41dXIsQ2zeHxX8tsrpBEOBoOWvR6YS734CVf7k+WQRBluFBseF8BWW2oKvgPCtTgLd7UpBVoF3taTSySqg=
 
@@ -45,6 +42,11 @@ script:
 after_success:
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
-- git checkout --orphan master
+- export CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+- rm -rf travis-phantomjs
+- git checkout master
+- git checkout $CURRENT_GIT_BRANCH
+- git config user.name '$GIT_NAME'
+- git config user.email '$GIT_EMAIL'
 - ember github-pages:commit --message "New release" --branch=master --environment=development
 - git push deploy master
