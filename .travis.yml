@@ -1,22 +1,24 @@
 language: node_js
-
 node_js:
 - '0.12'
-
 sudo: false
-
 cache:
   directories:
   - node_modules
-
 env:
-  global:
-  - secure: UqolzT6Ki+DIWBjGJ89GG0ei1ppwIbZiKkdHF/Ib8FBljonCQJ4HxEDQRLDquvO5nOXcfwL+YMuic0LlMPjf8plgh41dXIsQ2zeHxX8tsrpBEOBoOWvR6YS734CVf7k+WQRBluFBseF8BWW2oKvgPCtTgLd7UpBVoF3taTSySqg=
-  - secure: HnPbWBMweYs7DS0On/qnLDJEGSdDX6kUfOPKA8xOiwu1/VRWxwCxrboxD6SnFNuOe3B40o7RHXApdGSO4BNFwPYNx2RxKYYITe7320CqQJUjLjcKNYHh0fjvu9tmQ12w354QhEd6iGiWu9/CewVS9g5bO7Kci1QTKHo0mba5IBg=
+  matrix:
+  - EMBER_TRY_SCENARIO=default
+  - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-beta
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: EMBER_TRY_SCENARIO=ember-canary
 
 branches:
   only:
-  - main
+    - main
 
 before_install:
 - mkdir travis-phantomjs
@@ -33,22 +35,6 @@ install:
 - bower install
 
 script:
-- ember try:testall
+- ember try $EMBER_TRY_SCENARIO test
 
-after_success:
-# Remove the downloaded copy of phantomJS
-- rm -rf travis-phantomjs
-# Add a remote, authenticating via an OAuth token (encrypted via "travis secure")
-- git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
-# Download all branches from this new remote (really the same remote, but different auth)
-- git fetch deploy
-# Check out a local copy of "master", but don't switch to it yet
-- git branch $GH_DEST_BRANCH deploy/$GH_DEST_BRANCH
-# Set up some required git config stuff (more env variables encrypted via "travis secure")
-- git config user.name '$GIT_NAME'
-- git config user.email '$GIT_EMAIL'
-# Generate the github pages. When this command is finished I'll be on "master" branch with a
-# new commit already made (but not pushed)
-- ember github-pages:commit --message "New release" --branch $GH_DEST_BRANCH --environment development
-# Push the new commit
-- git push deploy master
+
