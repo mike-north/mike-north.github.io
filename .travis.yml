@@ -48,5 +48,5 @@ after_success:
 - git checkout $CURRENT_GIT_BRANCH
 - git config user.name '$GIT_NAME'
 - git config user.email '$GIT_EMAIL'
-- ember github-pages:commit --message "New release" --branch=master --environment=development
+- ember github-pages:commit --message "New release" --branch master --environment development
 - git push deploy master
