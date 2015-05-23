@@ -43,6 +43,7 @@ after_success:
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
 - export CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+- rm -rf travis-phantomjs
 - git checkout master
 - git checkout $CURRENT_GIT_BRANCH
 - git config user.name 'Mike North'
