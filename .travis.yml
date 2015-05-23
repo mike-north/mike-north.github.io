@@ -42,5 +42,6 @@ script:
 - ember try $EMBER_TRY_SCENARIO test
 
 after_success:
+- git checkout --orphan master
 - ember github-pages:commit --message "New release" --branch=master --environment=development
 - git push https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git master
