@@ -42,14 +42,8 @@ script:
 after_success:
 - git remote add deploy https://$GH_TOKEN:x-oauth-basic@github.com/truenorth/truenorth.github.io.git
 - git fetch deploy
-- export CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-- rm -rf travis-phantomjs
-- git checkout master
-- /bin/sh -c echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
-- git checkout $CURRENT_GIT_BRANCH
-- /bin/sh -c echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
+- git branch master origin/master
 - git config user.name '$GIT_NAME'
 - git config user.email '$GIT_EMAIL'
 - ember github-pages:commit --message "New release" --branch master --environment development
-- /bin/sh -c echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
 - git push deploy master
