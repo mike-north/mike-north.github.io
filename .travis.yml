@@ -45,8 +45,11 @@ after_success:
 - export CURRENT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 - rm -rf travis-phantomjs
 - git checkout master
+- echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
 - git checkout $CURRENT_GIT_BRANCH
+- echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
 - git config user.name '$GIT_NAME'
 - git config user.email '$GIT_EMAIL'
 - ember github-pages:commit --message "New release" --branch master --environment development
+- echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
 - git push deploy master
