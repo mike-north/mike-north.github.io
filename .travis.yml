@@ -8,9 +8,6 @@ cache:
 env:
   matrix:
   - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
   global:
     secure: UqolzT6Ki+DIWBjGJ89GG0ei1ppwIbZiKkdHF/Ib8FBljonCQJ4HxEDQRLDquvO5nOXcfwL+YMuic0LlMPjf8plgh41dXIsQ2zeHxX8tsrpBEOBoOWvR6YS734CVf7k+WQRBluFBseF8BWW2oKvgPCtTgLd7UpBVoF3taTSySqg=
 
@@ -47,6 +44,5 @@ after_success:
 - git fetch deploy
 - git config user.name 'Mike North'
 - git config user.email 'michael.l.north@gmail.com'
-- git checkout --orphan master
 - ember github-pages:commit --message "New release" --branch=master --environment=development
 - git push deploy master
