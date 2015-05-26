@@ -1,15 +1,12 @@
-<div class="container">
-<div class="row">
-  <div class="col s12 text-center">
-    {{#md-card title="Under construction"}}
-      {{#md-card-content}}
-        I'll get around to this as soon as I'm free
-        {{/md-card-content}}
-    {{/md-card}}
-  </div>
+<div class="navbar-fixed">
+{{#main-nav class="deep-purple"}}
+  {{#link-to 'speaking' tagName="li"}}
+    <a class="fa fa-comment">Speaking</a>
+  {{/link-to}}
+{{/main-nav}}
 </div>
+
 {{outlet}}
-</div>
 
 {{!-- ember-cli-materialize modal container --}}
 {{md-modal-container}}
