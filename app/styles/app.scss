@@ -19,3 +19,66 @@
     }
   }
 }
+
+$card_horizontal_image_width: 300px;
+.card.horizontal-with-image {
+  overflow: hidden;
+  .card-image-container {
+    max-width: $card_horizontal_image_width;
+    float: left;
+    height: 1px;
+  }
+  .card-title {
+    font-size: 2.2rem;
+  }
+  .card-content {
+    margin-left: $card_horizontal_image_width + 10px;
+
+    p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+
+@media only screen and (max-width : 700px) {
+  .card.horizontal-with-image {
+    .card-image-container {
+      float: none;
+      max-width: none;
+      height: 350px;
+      overflow: hidden;
+    }
+    .card-title {
+      font-size: 2.2rem;
+    }
+    .card-content {
+      margin-left: 0;
+
+      p {
+        margin-top: 20px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+}
+
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+footer {
+  .socialicon .fa {
+    width: 10px;
+    margin-right: 10px;
+  }
+}
