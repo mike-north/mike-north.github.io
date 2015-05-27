@@ -703,6 +703,21 @@ define('truenorth/components/lm-container', ['exports', 'ember', 'liquid-fire/ta
   });
 
 });
+define('truenorth/components/main-nav', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  exports['default'] = Ember['default'].Component.extend({
+    tagName: 'nav',
+    classNames: ['top-nav'],
+
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
+      this.$('.button-collapse').sideNav();
+    }
+  });
+
+});
 define('truenorth/components/materialize-badge', ['exports', 'ember', 'truenorth/components/md-badge'], function (exports, Ember, MaterializeBadge) {
 
   'use strict';
@@ -1294,6 +1309,13 @@ define('truenorth/components/radio-button', ['exports', 'ember-radio-button/comp
 	exports['default'] = RadioButton['default'];
 
 });
+define('truenorth/controllers/application', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Controller.extend({});
+
+});
 define('truenorth/controllers/array', ['exports', 'ember'], function (exports, Ember) {
 
 	'use strict';
@@ -1306,6 +1328,103 @@ define('truenorth/controllers/object', ['exports', 'ember'], function (exports, 
 	'use strict';
 
 	exports['default'] = Ember['default'].Controller;
+
+});
+define('truenorth/helpers/fa-icon', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  var FA_PREFIX = /^fa\-.+/;
+
+  var warn = Ember['default'].Logger.warn;
+
+  /**
+   * Handlebars helper for generating HTML that renders a FontAwesome icon.
+   *
+   * @param  {String} name    The icon name. Note that the `fa-` prefix is optional.
+   *                          For example, you can pass in either `fa-camera` or just `camera`.
+   * @param  {Object} options Options passed to helper.
+   * @return {Ember.Handlebars.SafeString} The HTML markup.
+   */
+  var faIcon = function faIcon(name, options) {
+    if (Ember['default'].typeOf(name) !== 'string') {
+      var message = 'fa-icon: no icon specified';
+      warn(message);
+      return Ember['default'].String.htmlSafe(message);
+    }
+
+    var params = options.hash,
+        classNames = [],
+        html = '';
+
+    classNames.push('fa');
+    if (!name.match(FA_PREFIX)) {
+      name = 'fa-' + name;
+    }
+    classNames.push(name);
+    if (params.spin) {
+      classNames.push('fa-spin');
+    }
+    if (params.flip) {
+      classNames.push('fa-flip-' + params.flip);
+    }
+    if (params.rotate) {
+      classNames.push('fa-rotate-' + params.rotate);
+    }
+    if (params.lg) {
+      warn('fa-icon: the \'lg\' parameter is deprecated. Use \'size\' instead. I.e. {{fa-icon size="lg"}}');
+      classNames.push('fa-lg');
+    }
+    if (params.x) {
+      warn('fa-icon: the \'x\' parameter is deprecated. Use \'size\' instead. I.e. {{fa-icon size="' + params.x + '"}}');
+      classNames.push('fa-' + params.x + 'x');
+    }
+    if (params.size) {
+      if (Ember['default'].typeOf(params.size) === 'string' && params.size.match(/\d+/)) {
+        params.size = Number(params.size);
+      }
+      if (Ember['default'].typeOf(params.size) === 'number') {
+        classNames.push('fa-' + params.size + 'x');
+      } else {
+        classNames.push('fa-' + params.size);
+      }
+    }
+    if (params.fixedWidth) {
+      classNames.push('fa-fw');
+    }
+    if (params.listItem) {
+      classNames.push('fa-li');
+    }
+    if (params.pull) {
+      classNames.push('pull-' + params.pull);
+    }
+    if (params.border) {
+      classNames.push('fa-border');
+    }
+    if (params.classNames && !Ember['default'].isArray(params.classNames)) {
+      params.classNames = [params.classNames];
+    }
+    if (!Ember['default'].isEmpty(params.classNames)) {
+      Array.prototype.push.apply(classNames, params.classNames);
+    }
+
+    html += '<';
+    var tagName = params.tagName || 'i';
+    html += tagName;
+    html += ' class=\'' + classNames.join(' ') + '\'';
+    if (params.title) {
+      html += ' title=\'' + params.title + '\'';
+    }
+    if (params.ariaHidden === undefined || params.ariaHidden) {
+      html += ' aria-hidden="true"';
+    }
+    html += '></' + tagName + '>';
+    return Ember['default'].String.htmlSafe(html);
+  };
+
+  exports['default'] = Ember['default'].Handlebars.makeBoundHelper(faIcon);
+
+  exports.faIcon = faIcon;
 
 });
 define('truenorth/helpers/lf-yield-inverse', ['exports', 'liquid-fire/ember-internals'], function (exports, ember_internals) {
@@ -1751,9 +1870,18 @@ define('truenorth/router', ['exports', 'ember', 'truenorth/config/environment'],
     location: config['default'].locationType
   });
 
-  Router.map(function () {});
+  Router.map(function () {
+    this.route('speaking');
+  });
 
   exports['default'] = Router;
+
+});
+define('truenorth/routes/speaking', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Route.extend({});
 
 });
 define('truenorth/services/liquid-fire-modals', ['exports', 'liquid-fire/modals'], function (exports, Modals) {
@@ -1785,7 +1913,14 @@ define('truenorth/templates/application', ['exports'], function (exports) {
           hasRendered: false,
           build: function build(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("        I'll get around to this soon\n");
+            var el1 = dom.createTextNode("    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("a");
+            dom.setAttribute(el1,"class","fa fa-comment");
+            var el2 = dom.createTextNode("Speaking");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -1847,7 +1982,7 @@ define('truenorth/templates/application', ['exports'], function (exports) {
           var morph0 = dom.createMorphAt(fragment,0,0,contextualElement);
           dom.insertBoundary(fragment, null);
           dom.insertBoundary(fragment, 0);
-          block(env, morph0, context, "md-card-content", [], {}, child0, null);
+          block(env, morph0, context, "link-to", ["speaking"], {"tagName": "li"}, child0, null);
           return fragment;
         }
       };
@@ -1861,31 +1996,15 @@ define('truenorth/templates/application', ['exports'], function (exports) {
       build: function build(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","container");
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","row");
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","col s12 text-center");
-        var el4 = dom.createTextNode("\n");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("  ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
+        dom.setAttribute(el1,"class","navbar-fixed");
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
@@ -1913,12 +2032,11 @@ define('truenorth/templates/application', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
-        var element0 = dom.childAt(fragment, [0]);
-        var morph0 = dom.createMorphAt(dom.childAt(element0, [1, 1]),1,1);
-        var morph1 = dom.createMorphAt(element0,3,3);
-        var morph2 = dom.createMorphAt(fragment,2,2,contextualElement);
+        var morph0 = dom.createMorphAt(dom.childAt(fragment, [0]),1,1);
+        var morph1 = dom.createMorphAt(fragment,2,2,contextualElement);
+        var morph2 = dom.createMorphAt(fragment,4,4,contextualElement);
         dom.insertBoundary(fragment, null);
-        block(env, morph0, context, "md-card", [], {"title": "Under construction"}, child0, null);
+        block(env, morph0, context, "main-nav", [], {"class": "deep-purple"}, child0, null);
         content(env, morph1, context, "outlet");
         content(env, morph2, context, "md-modal-container");
         return fragment;
@@ -3512,11 +3630,160 @@ define('truenorth/templates/components/liquid-with', ['exports'], function (expo
   }()));
 
 });
+define('truenorth/templates/components/main-nav', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      isHTMLBars: true,
+      revision: "Ember@1.12.0",
+      blockParams: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      build: function build(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","container");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","nav-wrapper");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"href","#!");
+        dom.setAttribute(el3,"class","brand-logo");
+        var el4 = dom.createTextNode("Mike North");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"href","#");
+        dom.setAttribute(el3,"data-activates","mobile-demo");
+        dom.setAttribute(el3,"class","button-collapse");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","mdi-navigation-menu");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("ul");
+        dom.setAttribute(el3,"class","right hide-on-med-and-down");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("ul");
+        dom.setAttribute(el3,"class","side-nav");
+        dom.setAttribute(el3,"id","mobile-demo");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      render: function render(context, env, contextualElement) {
+        var dom = env.dom;
+        var hooks = env.hooks, content = hooks.content;
+        dom.detectNamespace(contextualElement);
+        var fragment;
+        if (env.useFragmentCache && dom.canClone) {
+          if (this.cachedFragment === null) {
+            fragment = this.build(dom);
+            if (this.hasRendered) {
+              this.cachedFragment = fragment;
+            } else {
+              this.hasRendered = true;
+            }
+          }
+          if (this.cachedFragment) {
+            fragment = dom.cloneNode(this.cachedFragment, true);
+          }
+        } else {
+          fragment = this.build(dom);
+        }
+        var element0 = dom.childAt(fragment, [0, 1]);
+        var morph0 = dom.createMorphAt(dom.childAt(element0, [5]),1,1);
+        var morph1 = dom.createMorphAt(dom.childAt(element0, [7]),1,1);
+        content(env, morph0, context, "yield");
+        content(env, morph1, context, "yield");
+        return fragment;
+      }
+    };
+  }()));
+
+});
 define('truenorth/templates/components/modal-dialog', ['exports', 'ember-modal-dialog/templates/components/modal-dialog'], function (exports, template) {
 
 	'use strict';
 
 	exports['default'] = template['default'];
+
+});
+define('truenorth/templates/speaking', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      isHTMLBars: true,
+      revision: "Ember@1.12.0",
+      blockParams: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      build: function build(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      render: function render(context, env, contextualElement) {
+        var dom = env.dom;
+        var hooks = env.hooks, content = hooks.content;
+        dom.detectNamespace(contextualElement);
+        var fragment;
+        if (env.useFragmentCache && dom.canClone) {
+          if (this.cachedFragment === null) {
+            fragment = this.build(dom);
+            if (this.hasRendered) {
+              this.cachedFragment = fragment;
+            } else {
+              this.hasRendered = true;
+            }
+          }
+          if (this.cachedFragment) {
+            fragment = dom.cloneNode(this.cachedFragment, true);
+          }
+        } else {
+          fragment = this.build(dom);
+        }
+        var morph0 = dom.createMorphAt(fragment,0,0,contextualElement);
+        dom.insertBoundary(fragment, 0);
+        content(env, morph0, context, "outlet");
+        return fragment;
+      }
+    };
+  }()));
 
 });
 define('truenorth/tests/app.jshint', function () {
@@ -3526,6 +3793,26 @@ define('truenorth/tests/app.jshint', function () {
   module('JSHint - .');
   test('app.js should pass jshint', function() { 
     ok(true, 'app.js should pass jshint.'); 
+  });
+
+});
+define('truenorth/tests/components/main-nav.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - components');
+  test('components/main-nav.js should pass jshint', function() { 
+    ok(true, 'components/main-nav.js should pass jshint.'); 
+  });
+
+});
+define('truenorth/tests/controllers/application.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - controllers');
+  test('controllers/application.js should pass jshint', function() { 
+    ok(true, 'controllers/application.js should pass jshint.'); 
   });
 
 });
@@ -3596,6 +3883,16 @@ define('truenorth/tests/router.jshint', function () {
   });
 
 });
+define('truenorth/tests/routes/speaking.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - routes');
+  test('routes/speaking.js should pass jshint', function() { 
+    ok(true, 'routes/speaking.js should pass jshint.'); 
+  });
+
+});
 define('truenorth/tests/test-helper', ['truenorth/tests/helpers/resolver', 'ember-qunit'], function (resolver, ember_qunit) {
 
 	'use strict';
@@ -3610,6 +3907,89 @@ define('truenorth/tests/test-helper.jshint', function () {
   module('JSHint - .');
   test('test-helper.js should pass jshint', function() { 
     ok(true, 'test-helper.js should pass jshint.'); 
+  });
+
+});
+define('truenorth/tests/unit/components/main-nav-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleForComponent('main-nav', 'Unit | Component | main nav', {});
+
+  ember_qunit.test('it renders', function (assert) {
+    assert.expect(2);
+
+    // Creates the component instance
+    var component = this.subject();
+    assert.equal(component._state, 'preRender');
+
+    // Renders the component to the page
+    this.render();
+    assert.equal(component._state, 'inDOM');
+  });
+
+  // Specify the other units that are required for this test
+  // needs: ['component:foo', 'helper:bar']
+
+});
+define('truenorth/tests/unit/components/main-nav-test.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - unit/components');
+  test('unit/components/main-nav-test.js should pass jshint', function() { 
+    ok(true, 'unit/components/main-nav-test.js should pass jshint.'); 
+  });
+
+});
+define('truenorth/tests/unit/controllers/application-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleFor('controller:application', {});
+
+  // Replace this with your real tests.
+  ember_qunit.test('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+
+  // Specify the other units that are required for this test.
+  // needs: ['controller:foo']
+
+});
+define('truenorth/tests/unit/controllers/application-test.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - unit/controllers');
+  test('unit/controllers/application-test.js should pass jshint', function() { 
+    ok(true, 'unit/controllers/application-test.js should pass jshint.'); 
+  });
+
+});
+define('truenorth/tests/unit/routes/speaking-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleFor('route:speaking', 'Unit | Route | speaking', {});
+
+  ember_qunit.test('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+
+  // Specify the other units that are required for this test.
+  // needs: ['controller:foo']
+
+});
+define('truenorth/tests/unit/routes/speaking-test.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - unit/routes');
+  test('unit/routes/speaking-test.js should pass jshint', function() { 
+    ok(true, 'unit/routes/speaking-test.js should pass jshint.'); 
   });
 
 });
@@ -4088,7 +4468,7 @@ catch(err) {
 if (runningTests) {
   require("truenorth/tests/test-helper");
 } else {
-  require("truenorth/app")["default"].create({"name":"truenorth","version":"0.0.0.d796961a"});
+  require("truenorth/app")["default"].create({"name":"truenorth","version":"0.0.0.29747e05"});
 }
 
 /* jshint ignore:end */

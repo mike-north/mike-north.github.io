@@ -10146,3 +10146,6 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .text-center {
   text-align: center; }
+
+.top-nav ul li a.fa:before {
+  margin-right: 5px; }
