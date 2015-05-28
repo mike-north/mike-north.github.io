@@ -22,12 +22,21 @@
   .tabs {
     background-color: $primary-color;
     .tab {
+      min-width: 100px;
       a {
         color: white;
       }
     }
     .indicator {
       background-color: white;
+    }
+  }
+}
+ @media #{$small-and-down} {
+
+  .top-nav {
+    > .container:first-child {
+      height: 56px;
     }
   }
 }
