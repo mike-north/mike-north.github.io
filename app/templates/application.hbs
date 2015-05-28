@@ -1,27 +1,24 @@
-<div class="navbar-fixed">
+<header class="navbar-fixed">
 {{#main-nav class="deep-purple"}}
-  {{#link-to 'index' tagName="li"}}
-    <a class="fa fa-user">About Me</a>
+  {{#link-to 'index' tagName="li"}} <a class="fa fa-user">About Me</a>
   {{/link-to}}
-  {{#link-to 'speaking' tagName="li"}}
-    <a class="fa fa-comment">Speaking</a>
+  {{#link-to 'speaking' tagName="li"}} <a class="fa fa-comment">Speaking</a>
   {{/link-to}}
+{{!--   {{#link-to 'code' tagName="li"}} <a class="fa fa-code">Code</a>
+  {{/link-to}} --}}
 {{/main-nav}}
-</div>
-
-{{outlet}}
+</header>
+<main>
+{{liquid-outlet}}
 
 {{!-- ember-cli-materialize modal container --}}
 {{md-modal-container}}
-
+</main>
 <footer class="page-footer deep-purple">
   <div class="container">
     <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Footer Content</h5>
-        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </div>
-      <div class="col l4 offset-l2 s12">
+
+      <div class="col l12 s12">
         <h5 class="white-text">Social</h5>
         <ul>
           <li>
@@ -51,7 +48,6 @@
   <div class="footer-copyright">
     <div class="container">
     © 2015 Mike North
-    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
     </div>
   </div>
 </footer>

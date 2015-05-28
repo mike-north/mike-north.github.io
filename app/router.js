@@ -6,7 +6,11 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('speaking');
+  this.route('speaking', function() {
+    this.route('past');
+    this.route('upcoming');
+  });
+  this.route('code');
 });
 
 export default Router;

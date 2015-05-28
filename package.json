@@ -42,6 +42,6 @@
     "ember-new-computed": "1.0.0",
     "ember-radio-button": "1.0.4",
     "ember-try": "0.0.5",
-    "liquid-fire": "0.19.4"
+    "liquid-fire": "~0.20.0"
   }
 }
