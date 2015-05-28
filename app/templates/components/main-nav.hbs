@@ -10,3 +10,12 @@
     </ul>
   </div>
 </div>
+<div class="main-nav-tabs">
+  <div class="container">
+  {{md-tabs
+    selected=navui.selectedTabId
+    content=navui.tabs
+    optionValuePath='route'
+    optionLabelPath='name'}}
+  </div>
+ </div>

@@ -39,6 +39,9 @@ $primary-color: color("deep-purple", "base");
 @import "components/date_picker/default.date.scss";
 @import "components/date_picker/default.time.scss";
 
+@import "top-nav";
+@import "md-horiz-image-card";
+
 /* FIXME: Workaround for https://github.com/Dogfalo/materialize/issues/1079 */
 @each $mdi-icon-name, $mdi-icon-value in $mdi-list-icons {
   .#{$mdi-prefix}#{$mdi-icon-name}:before {
@@ -46,80 +49,25 @@ $primary-color: color("deep-purple", "base");
   }
 }
 
+$main-top-margin: 40px;
 
 .text-center {
   text-align: center;
 }
 
-.top-nav {
-  ul {
-    li a.fa:before {
-      margin-right: 5px;
-    }
-  }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-$card_horizontal_image_width: 300px;
-.card.md-horiz-image-card {
-  overflow: hidden;
-  .card-image-container {
-    max-width: $card_horizontal_image_width;
-    float: left;
-    height: 1px;
-  }
-  .card-title {
-    font-size: 2.2rem;
-  }
-  .card-content {
-    margin-left: $card_horizontal_image_width + 10px;
-
-    p {
-      margin-top: 20px;
-      font-size: 1.2rem;
-    }
-    ul li {
-      margin-left: 20px;
-      list-style: disc outside;
-    }
-  }
+main {
+  margin-top: $main-top-margin;
+  flex: 1 0 auto;
 }
 
 
-@media only screen and (max-width : 700px) {
-  .card.md-horiz-image-card {
-    .card-image-container {
-      float: none;
-      max-width: none;
-      height: 350px;
-      overflow: hidden;
-    }
-    .card-title {
-      font-size: 2.2rem;
-    }
-    .card-content {
-      margin-left: 0;
-
-      p {
-        margin-top: 20px;
-        font-size: 1.1rem;
-      }
-    }
-  }
-
-}
-
-
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background: #eee;
-  }
-
-  main {
-    margin-top: 40px;
-    flex: 1 0 auto;
-  }
 
 footer {
   .socialicon .fa {
@@ -127,3 +75,19 @@ footer {
     margin-right: 10px;
   }
 }
+
+.liquid-container {
+  height: 100%;
+
+  position: relative;
+  overflow: initial;
+
+  -webkit-transform: initial;
+  -moz-transform:    initial;
+  transform:         initial;
+}
+
+.speaking {
+  margin-top: 40px;
+}
+
