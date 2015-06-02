@@ -11,6 +11,10 @@ Router.map(function() {
     this.route('upcoming');
   });
   this.route('code');
+
+  this.route('blog', function() {
+    this.route('show', {path: ':id'});
+  });
 });
 
 export default Router;
