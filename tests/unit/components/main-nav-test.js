@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 
 moduleForComponent('main-nav', 'Unit | Component | main nav', {
   // Specify the other units that are required for this test
