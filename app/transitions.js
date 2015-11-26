@@ -1,14 +1,39 @@
-export default function () {
+
+export default function() {
   this.transition(
     this.fromRoute('index'),
-    this.use('toRight'),
-    this.reverse('toLeft')
+    this.toRoute('travel'),
+    this.use('toLeft'),
+    this.reverse('toRight')
   );
-
   this.transition(
-    this.fromRoute('speaking.past'),
-    this.toRoute('speaking.upcoming'),
-    this.use('toRight'),
-    this.reverse('toLeft')
+    this.fromRoute('index'),
+    this.toRoute('speaking'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('index'),
+    this.toRoute('contact'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('speaking'),
+    this.toRoute('travel'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('speaking'),
+    this.toRoute('contact'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('travel'),
+    this.toRoute('contact'),
+    this.use('toLeft'),
+    this.reverse('toRight')
   );
 }
