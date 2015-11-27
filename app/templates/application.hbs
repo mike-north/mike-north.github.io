@@ -1,55 +1,14 @@
-<header class="navbar-fixed">
-{{#main-nav class="deep-purple"}}
-  {{#link-to 'index' tagName="li"}} <a class="fa fa-user">About Me</a>
-  {{/link-to}}
-  {{#link-to 'speaking' tagName="li"}} <a class="fa fa-comment">Speaking</a>
-  {{/link-to}}
-{{!--   {{#link-to 'blog' tagName="li"}} <a class="fa mdi-av-mic">Blog</a>
-  {{/link-to}} --}}
-{{!--   {{#link-to 'code' tagName="li"}} <a class="fa fa-code">Code</a>
-  {{/link-to}} --}}
-{{/main-nav}}
-</header>
-<main>
-{{liquid-outlet}}
-
-{{!-- ember-cli-materialize modal container --}}
-{{md-modal-container}}
-</main>
-<footer class="page-footer deep-purple">
-  <div class="container">
-    <div class="row">
-
-      <div class="col l12 s12">
-        <h5 class="white-text">Social</h5>
-        <ul>
-          <li>
-            <a class="grey-text text-lighten-3 socialicon" target="_blank" href="http://twitter.com/michaellnorth">
-              {{fa-icon 'twitter inverse'}} @MichaelLNorth
-            </a>
-          </li>
-          <li>
-            <a class="grey-text text-lighten-3 socialicon" target="_blank" href="http://github.com/truenorth">
-              {{fa-icon 'github inverse'}} truenorth
-            </a>
-          </li>
-          <li>
-            <a class="grey-text text-lighten-3 socialicon" target="_blank" href="http://linked.in/mike.l.north">
-              {{fa-icon 'linkedin inverse'}}mike.l.north
-            </a>
-          </li>
-          <li>
-            <a class="grey-text text-lighten-3 socialicon" target="_blank" href="http://facebook.com/mike.l.north">
-              {{fa-icon 'facebook inverse'}}mike.l.north
-            </a>
-          </li>
-        </ul>
-      </div>
+{{#mdl-nav title='Mike North' fixedHeader=true transparent=true class='layout-transparent' closeDrawerOnItemClick=true}}
+  {{mdl-nav-item name='About'      route='index'}}
+  {{mdl-nav-item name='Speaking'   route='speaking'}}
+  {{mdl-nav-item name='Travel'     route='travel'}}
+  {{mdl-nav-item name='Contact Me' route='contact'}}
+  <div class="mike-content">
+  <div class="mdl-grid content-container">
+    <div class="mdl-cell mdl-cell--12-col white-text">
+       {{liquid-outlet}}
     </div>
   </div>
-  <div class="footer-copyright">
-    <div class="container">
-    © 2015 Mike North
-    </div>
   </div>
-</footer>
+{{/mdl-nav}}
+

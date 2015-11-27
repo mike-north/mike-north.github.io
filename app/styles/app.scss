@@ -1,59 +1,115 @@
-// Example app.scss
-@import 'components/color';
-@import 'components/variables';
+@import 'material-design-lite';
 
-// Custom color settings go here
-$primary-color: color("deep-purple", "base");
-
-@import 'materialize';
-@import 'ember-cli-materialize';
-
-@import "top-nav";
-@import "md-horiz-image-card";
-
-$main-top-margin: 40px;
-
-.text-center {
-  text-align: center;
+*, h1, h2, h3, h4, p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+h1, h2, h3, h4 {
+  font-weight: 100;
+}
+
+.layout-transparent {
+  background: url('/img/at-laptop.jpg') center / cover;
+}
+
+.mdl-layout__header-row .mdl-navigation__link {
+  line-height: 36px;
+}
+
+.mdl-navigation__link.active {
+  position: relative;
+  top: 1px;
+  border-bottom: 3px solid white;
+}
 
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
-main {
-  margin-top: $main-top-margin;
-  flex: 1 0 auto;
+p {
+  font-size: 1.2rem;
+  font-weight: 200;
 }
 
+.text-white {
+  color: white;
+}
 
-
-footer {
-  .socialicon .fa {
-    width: 10px;
-    margin-right: 10px;
+.x-trip {
+  color: white;
+  position: relative;
+  .title {
+    font-weight: 100;
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  .date {
+    font-weight: 100;
+    position: absolute;
+    right: 0;
+    top: 16px;
+    text-align: right;
+  }
+  .map-canvas {
+    width: 100%;
+    height: 250px;
   }
 }
 
-.liquid-container {
-  height: 100%;
 
+.mike-content {
+
+  .content-container {
+    position: relative;
+    background: rgba(0,0,0, 0.4);
+  }
+}
+
+.contact-methods {
+  color: white;
+}
+
+.x-talk {
+  padding: 10px;
+  margin: 10px -10px;
+  color: white;
   position: relative;
-  overflow: initial;
+  border-top: 1px solid white;
+  .title {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 500;
+  }
+  .venue-info {
+    position: relative;
+    top: 0;
+    color: #bbb;
+    .venue-link {
+      font-weight: 300;
+      line-height: 2rem;
+      text-transform: uppercase;
+    }
+    .event-date {
+      position: absolute;
+      right: 0;
+      text-align: right;
+    }
+  }
+  .tags {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    .tag {
+      line-height: 1.5rem;
+      padding: 0 6px;
+      border-radius: 2px;
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .description {
 
-  -webkit-transform: initial;
-  -moz-transform:    initial;
-  transform:         initial;
+  }
 }
-
-.speaking {
-  margin-top: 40px;
-}
-
-.brand-logo {
-  white-space: nowrap;
-}
-

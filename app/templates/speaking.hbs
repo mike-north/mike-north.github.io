@@ -1,2 +1,7 @@
+<h1 class="text-white">Speaking</h1>
 
-{{liquid-outlet}}
+<p class="text-white">I often speak about building software.</p>
+
+{{#each model as |talk|}}
+  {{x-talk talk=talk}}
+{{/each}}

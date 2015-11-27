@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'truenorth',
+    modulePrefix: 'mikenorth',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -12,12 +12,23 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    sassOptions: {
+      includePaths: ['bower_components/material-design-lite/src']
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
   };
+
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
+      'font-src': "'self' fonts.gstatic.com",
+      'connect-src': "'self' maps.gstatic.com gist.githubusercontent.com",
+      'img-src': "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com data:",
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
+    };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -40,7 +51,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-      ENV.locationType = 'hash';
+
   }
 
   return ENV;
