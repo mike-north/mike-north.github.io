@@ -1,5 +1,13 @@
 @import 'material-design-lite';
 
+*, h1, h2, h3, h4, p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 100;
+}
+
 .layout-transparent {
   background: url('/img/at-laptop.jpg') center / cover;
 }
@@ -19,9 +27,89 @@ body {
   padding: 0;
 }
 
+p {
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+.text-white {
+  color: white;
+}
+
+.x-trip {
+  color: white;
+  position: relative;
+  .title {
+    font-weight: 100;
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  .date {
+    font-weight: 100;
+    position: absolute;
+    right: 0;
+    top: 16px;
+    text-align: right;
+  }
+  .map-canvas {
+    width: 100%;
+    height: 250px;
+  }
+}
+
 
 .mike-content {
-  h1 {
-    color: white;
+
+  .content-container {
+    position: relative;
+    background: rgba(0,0,0, 0.4);
+  }
+}
+
+.contact-methods {
+  color: white;
+}
+
+.x-talk {
+  padding: 10px;
+  margin: 10px -10px;
+  color: white;
+  position: relative;
+  border-top: 1px solid white;
+  .title {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 500;
+  }
+  .venue-info {
+    position: relative;
+    top: 0;
+    color: #bbb;
+    .venue-link {
+      font-weight: 300;
+      line-height: 2rem;
+      text-transform: uppercase;
+    }
+    .event-date {
+      position: absolute;
+      right: 0;
+      text-align: right;
+    }
+  }
+  .tags {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    .tag {
+      line-height: 1.5rem;
+      padding: 0 6px;
+      border-radius: 2px;
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .description {
+
   }
 }

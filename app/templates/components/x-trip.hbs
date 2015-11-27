@@ -1,0 +1,9 @@
+<div>
+<span class="title">
+  {{trip.destination.name}}
+</span>
+<span class="date">
+  {{moment-format trip.date "MMM DD, YYYY"}}
+</span>
+</div>
+{{google-map lat=trip.destination.lat lng=trip.destination.lng gopt_zoomControl=false gopt_draggable=false gopt_maxZoom=7 gopt_minZoom=5 gopt_streetViewControl=false gopt_mapTypeControl=false}}

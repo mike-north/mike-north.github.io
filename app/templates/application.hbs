@@ -1,12 +1,14 @@
-{{#mdl-nav title='Mike North' fixedHeader=true transparent=true class='layout-transparent'}}
+{{#mdl-nav title='Mike North' fixedHeader=true transparent=true class='layout-transparent' closeDrawerOnItemClick=true}}
   {{mdl-nav-item name='About'      route='index'}}
   {{mdl-nav-item name='Speaking'   route='speaking'}}
   {{mdl-nav-item name='Travel'     route='travel'}}
   {{mdl-nav-item name='Contact Me' route='contact'}}
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col white-text mike-content">
+  <div class="mike-content">
+  <div class="mdl-grid content-container">
+    <div class="mdl-cell mdl-cell--12-col white-text">
        {{liquid-outlet}}
     </div>
+  </div>
   </div>
 {{/mdl-nav}}
 
