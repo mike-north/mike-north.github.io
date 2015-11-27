@@ -42,6 +42,7 @@
     "ember-export-application-global": "^1.0.4",
     "ember-google-map": "mike-north/ember-google-map#master",
     "ember-legacy-views": "^0.2.0",
+    "ember-lodash": "0.0.6",
     "ember-material-lite": "0.1.14",
     "ember-moment": "4.1.0",
     "ember-new-computed": "^1.0.3",
