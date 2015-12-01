@@ -27,6 +27,9 @@ install:
 script:
 - ember test ci
 
+notifications:
+  email:
+    - michael.l.north@gmail.com
 
 after_success:
 # Remove the downloaded copy of phantomJS
