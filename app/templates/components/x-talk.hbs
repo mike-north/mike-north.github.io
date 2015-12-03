@@ -1,20 +1,23 @@
-<div class="title">{{talk.name}}</div>
-<div class="venue-info">
-  <a href={{talk.eventURL}} class="venue-link" target="_blank">
-    {{talk.eventName}}
-  </a>
-  <span class="event-date">
-    {{moment-format talk.date 'MMM DD, YYYY'}}
+<summary>
+  <span class="title">
+  {{talk.name}}
   </span>
-</div>
-<ul class="tags">
-  {{#each talk.tags as |tag|}}
-    <li class="tag">
-      {{tag}}
-    </li>
-  {{/each}}
-</ul>
+  <ul class="tags">
+    {{#each talk.tags as |tag|}}
+      <li class="tag">
+        {{tag}}
+      </li>
+    {{/each}}
+  </ul>
+  <div class="venue-info">
+    <a href={{talk.eventURL}} class="venue-link" target="_blank">
+      {{talk.eventName}}
+    </a>
+    <span class="event-date">
+      {{dateString}}
+    </span>
+  </div>
+</summary>
 <p class="description">
   {{talk.description}}
 </p>
-{{yield}}
