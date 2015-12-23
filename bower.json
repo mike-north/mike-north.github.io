@@ -17,7 +17,6 @@
     "moment-timezone": ">= 0.1.0"
   },
   "resolutions": {
-    "ember": "release",
-    "ember-data": "release"
+    "ember": "release"
   }
 }
