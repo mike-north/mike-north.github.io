@@ -71,20 +71,26 @@ p {
 }
 
 .x-talk {
+  opacity: 0.6;
   padding: 10px;
   margin: 10px -10px;
   color: white;
   position: relative;
   border-top: 1px solid white;
   .title {
+    color: #fff;
     font-size: 2rem;
     line-height: 2rem;
     font-weight: 500;
   }
+  &.x-talk-upcoming {
+    opacity: 1;
+  }
+
   .venue-info {
     position: relative;
     top: 0;
-    color: #bbb;
+    color: #eee;
     .venue-link {
       font-weight: 300;
       line-height: 2rem;
